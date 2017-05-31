@@ -1,2 +1,2 @@
-# Custom_Ethereum_Ticker
-Testing with Cryptonator API
+# Custom Ethereum Ticker
+Using Cryptonator's API, this node.js application grabs the current price of Ethereum every second.

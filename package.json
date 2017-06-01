@@ -1,0 +1,23 @@
+{
+  "name": "ethereum_ticker",
+  "version": "1.0.0",
+  "description": "Using Cryptonator's API, this node.js application grabs the current price of Ethereum every second.",
+  "main": "app.js",
+  "dependencies": {
+    "request": "^2.81.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/khanguslee/Custom_Ethereum_Ticker.git"
+  },
+  "author": "Kuan Hou Lee",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/khanguslee/Custom_Ethereum_Ticker/issues"
+  },
+  "homepage": "https://github.com/khanguslee/Custom_Ethereum_Ticker#readme"
+}

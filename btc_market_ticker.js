@@ -2,6 +2,7 @@ var request = require('request');
 var Chart = require('chart.js');
 var app = require('express')();
 var server = require('http').createServer(app);
+var io = require('socket.io').listen(server);
 
 // URL to query
 const url = 'https://api.btcmarkets.net/market/ETH/AUD/tick';
@@ -19,12 +20,16 @@ function sendRequest(){
     });
 }
 
-setInterval(sendRequest, 1000);
+io.sockets.on('connection', function(socket){
+    setInterval(sendRequest, 1000);
+})
 
 
 
-
-server.listen(3000);
+// Host webpage
+server.listen(3000, function(){
+    console.log('Webpage running at http://localhost:3000');
+});
 
 app.get('/', function (req, res){
     res.sendFile(__dirname+'/index.html');
@@ -33,3 +38,7 @@ app.get('/', function (req, res){
 app.get('/script.js', function(req, res){
     res.sendFile(__dirname+'/script.js');
 })
+
+app.use(function(req, res){
+        res.status(404).send("Webpage does not exist.");
+    });

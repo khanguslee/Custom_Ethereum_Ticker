@@ -2,19 +2,25 @@
 <html>
     <head>
         <title>Ethereum Ticker</title>
+        <script src="/socket.io/socket.io.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.1.4/Chart.min.js"></script>
         
     </head>
     <body>
-        </canvas><canvas id="myChart"></canvas>
         <fieldset>
-            <p id="cryptoCurrency">Crypto Currency: <span id="currentCryptoCurrency">N/A</span></p>
-            <p id="actualCurrency">Currency: <span id="currentActualCurrency">N/A</span></p>
-            <p id="bestBid">Best Bid: <span id="currentBid">0</span></p>
-            <p id="bestAsk">Best Ask: <span id="currenctAsk">0</span></p>
-            <p id="lastPrice">Last Price: <span id="currentLastPrice">0</span></p>
+            <p>Crypto currency: <span id="currentCryptoCurrency">N/A</span></p>
+            <p>Currency: <span id="currentActualCurrency">N/A</span></p>
+            <p>Best bid: <span id="currentBid">0</span></p>
+            <p>Best ask: <span id="currentAsk">0</span></p>
+            <p>Last price: <span id="currentLastPrice">0</span></p>
+            <br>
+            <p>Last update: <span id="lastUpdateTime">0</span> seconds ago</p>
         </fieldset>
-        
+        <fieldset>
+            
+        </fieldset>
+        </canvas><canvas id="myChart"></canvas>
+
         <script src="/script.js"></script>
     </body>
 </html>

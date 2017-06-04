@@ -1,5 +1,24 @@
 var ctx = document.getElementById('myChart').getContext('2d');
+var socket = io();
 
+var updateTime;
+
+socket.on('updatePrice', function(data){
+  // Get current time
+  var currentTime = new Date().getTime();
+  currentTime = Math.floor(currentTime/1000);
+  updateTime = data[5];
+  
+  // Update HTML fields
+  document.getElementById('currentCryptoCurrency').innerHTML = data[0];
+  document.getElementById('currentActualCurrency').innerHTML = data[1];
+  document.getElementById('currentBid').innerHTML = data[2];
+  document.getElementById('currentAsk').innerHTML = data[3];
+  document.getElementById('currentLastPrice').innerHTML = data[4];
+  document.getElementById('lastUpdateTime').innerHTML = currentTime - updateTime;
+
+
+})
 /*
 var myChart = new Chart(ctx, {
   type: 'line',

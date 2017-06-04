@@ -10,14 +10,18 @@
         <fieldset>
             <p>Crypto currency: <span id="currentCryptoCurrency">N/A</span></p>
             <p>Currency: <span id="currentActualCurrency">N/A</span></p>
-            <p>Best bid: <span id="currentBid">0</span></p>
-            <p>Best ask: <span id="currentAsk">0</span></p>
-            <p>Last price: <span id="currentLastPrice">0</span></p>
+            <p>Best bid: $<span id="currentBid">0</span></p>
+            <p>Best ask: $<span id="currentAsk">0</span></p>
+            <p>Last price: $<span id="currentLastPrice">0</span></p>
             <br>
             <p>Last update: <span id="lastUpdateTime">0</span> seconds ago</p>
         </fieldset>
+        <br>
         <fieldset>
-            
+            <p>Enter your current amount of Ether:</p>
+            <input type="text" id="inputValue" value="">
+            <button onclick="submitValue()">Submit</button>
+            <p>Value: $<span id="outputValue">N/A</p>
         </fieldset>
         </canvas><canvas id="myChart"></canvas>
 

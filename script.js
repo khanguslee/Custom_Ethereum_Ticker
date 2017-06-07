@@ -1,5 +1,6 @@
 var socket = io();
-
+var ctx = document.getElementById("etherChart");
+var ctx1 = document.getElementById("LTCChart");
 var updateTime_1, updateTime_2;
 
 socket.on('updateEther', function(data){
@@ -16,8 +17,9 @@ socket.on('updateEther', function(data){
   document.getElementById('currentLastPrice_1').innerHTML = data[4];
   document.getElementById('lastUpdateTime_1').innerHTML = currentTime - updateTime_1;
   if (document.getElementById('outputValue_1').textContent != 'N/A'){
-    submitValue();
+    submitValue_1();
   }
+  addData(etherChart, new Date(), data[4]);
 })
 
 socket.on('updateLTC', function(data){
@@ -33,6 +35,10 @@ socket.on('updateLTC', function(data){
   document.getElementById('currentAsk_2').innerHTML = data[3];
   document.getElementById('currentLastPrice_2').innerHTML = data[4];
   document.getElementById('lastUpdateTime_2').innerHTML = currentTime - updateTime_2;
+  if (document.getElementById('outputValue_2').textContent != 'N/A'){
+    submitValue_2();
+  }
+  addData(LTCChart, new Date(), data[4]);
 })
 
 function submitValue_1(){
@@ -49,4 +55,76 @@ function submitValue_2(){
   LTCPrice = document.getElementById('currentLastPrice_2').textContent;
   totalAmount = (LTCAmount*LTCPrice).toFixed(2);
   document.getElementById('outputValue_2').innerHTML = totalAmount;
+}
+
+var etherChart = new Chart(ctx, {
+    type: 'line',
+    data: {
+        labels: ["Ethereum"],
+        datasets: [{
+            data: [],
+            borderWidth: 1
+        }]
+    },
+    options: {
+        title: {
+          display: true,
+          text: 'Ethereum Graph'
+        },
+        scales: {
+          xAxes: [{
+            time: {
+              unit: 'second'
+            }
+          }]
+        },
+        elements: {
+          point: {
+            radius: 0
+          }
+        },
+        legend: {
+          display:false
+        }
+    }
+});
+
+var LTCChart = new Chart(ctx1, {
+    type: 'line',
+    data: {
+        labels: ["Lite Coin"],
+        datasets: [{
+            data: [],
+            borderWidth: 1
+        }]
+    },
+    options: {
+        title: {
+          display: true,
+          text: 'Lite Coin Graph'
+        },
+        scales: {
+          xAxes: [{
+            time: {
+              unit: 'second'
+            }
+          }]
+        },
+        elements: {
+          point: {
+            radius: 0
+          }
+        },
+        legend: {
+          display:false
+        }
+    }
+});
+
+function addData(chart, label, data) {
+    chart.data.labels.push(label);
+    chart.data.datasets.forEach((dataset) => {
+        dataset.data.push(data);
+    });
+    chart.update();
 }

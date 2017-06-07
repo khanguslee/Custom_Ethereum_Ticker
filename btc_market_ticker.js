@@ -5,21 +5,28 @@ var server = require('http').createServer(app);
 var io = require('socket.io').listen(server);
 
 // URL to query
-const url = 'https://api.btcmarkets.net/market/ETH/AUD/tick';
+const urlETH = 'https://api.btcmarkets.net/market/ETH/AUD/tick';
+const urlLTC = 'https://api.btcmarkets.net/market/LTC/AUD/tick';
 
 io.sockets.on('connection', function(socket){
     function sendRequest(){
-        request(url, function (error, response, body) {
-            console.log(body);    // Display body of return message
+        request(urlETH, function (error, response, body) {
+            //console.log(body);    // Display body of return message
             body = JSON.parse(body);
-            console.log("Crypto currency: ", body.instrument);
-            console.log("Currency: ", body.currency);
-            console.log("Best bid: ", body.bestBid);
-            console.log("Best ask: ", body.bestAsk);
-            console.log("Last price: ", body.lastPrice);
-            console.log();
+            // console.log("Crypto currency: ", body.instrument);
+            // console.log("Currency: ", body.currency);
+            // console.log("Best bid: ", body.bestBid);
+            // console.log("Best ask: ", body.bestAsk);
+            // console.log("Last price: ", body.lastPrice);
+            // console.log();
             var data = [body.instrument, body.currency, body.bestBid, body.bestAsk, body.lastPrice, body.timestamp];
-            socket.emit('updatePrice', data);
+            socket.emit('updateEther', data);
+        });
+
+        request(urlLTC, function (error, response, body){
+            console.log(body);
+            body = JSON.parse(body);
+
         });
     }
     setInterval(sendRequest, 1000);

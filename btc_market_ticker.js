@@ -24,7 +24,7 @@ io.sockets.on('connection', function(socket){
         });
 
         request(urlLTC, function (error, response, body){
-            console.log(body);
+            //console.log(body);
             body = JSON.parse(body);
             var data = [body.instrument, body.currency, body.bestBid, body.bestAsk, body.lastPrice, body.timestamp];
             socket.emit('updateLTC', data);
